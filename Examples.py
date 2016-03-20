@@ -39,7 +39,7 @@ def onAndOff():
     print(nn.predict(inputs))
 
 
-def isTriangle(x,y,z):
+def _isTriangle(x,y,z):
     """Checks whether a triangle exists with the side lengths x,y,z"""
     
     lengths = [x,y,z]
@@ -58,11 +58,11 @@ def triangleNetwork():
     shortest = 1
     longest  = 100
     rows = []
-    for _n in range(25000):
+    for _n in range(2500):
         x = random.randint(shortest, longest)
         y = random.randint(shortest, longest)
         z = random.randint(shortest, longest)
-        rows.append([x,y,z, float(isTriangle(x,y,z))])
+        rows.append([x,y,z, float(_isTriangle(x,y,z))])
 
     data = np.array(rows)
     inputs = data[:,0:3]
@@ -85,7 +85,7 @@ def triangleNetwork():
     totalCount=0
     correctCount=0
     for xx,res in zip(test_inputs, test_results[0]):
-        isCorrect = isTriangle(xx[0],xx[1],xx[2]) == (res > 0.5)
+        isCorrect = _isTriangle(xx[0],xx[1],xx[2]) == (res > 0.5)
         print("({:2d},{:2d},{:2d}) :: {:^5} ({:.2f}).".format(xx[0], xx[1], xx[2], str(isCorrect), res))
         totalCount += 1
         correctCount += float(isCorrect)
