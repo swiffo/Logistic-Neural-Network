@@ -1,7 +1,7 @@
 import unittest
-import neural_network as neural
 import numpy as np
 import math
+import neural_network as neural
 
 class TestSigmoid(unittest.TestCase):
     def testSigmoid(self):
@@ -23,7 +23,7 @@ class TestSigmoidPrime(unittest.TestCase):
         m_c = m.copy()
         eps = 1e-6
 
-        der = neural.sigmoidPrime(m)
+        der = neural.sigmoid_prime(m)
         exp = (neural.sigmoid(m+eps) - neural.sigmoid(m-eps)) / ( 2*eps)
 
         diff = np.sum(der - exp)

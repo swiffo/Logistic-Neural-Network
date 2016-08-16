@@ -3,11 +3,31 @@ import math
 import random
 
 def sigmoid(m):
-    """Sigmoid function vectorized"""
+    """Vectorized sigmoid function.
+
+    Calculate x -> 1/(1+e^{-x}).
+
+    Args:
+        m: a float or np.array
+
+    Returns:
+        Float if input is float. Numpy array if input is numpy array with the
+        formula applied in a vectorized manner.
+    """
     return 1/(1+np.exp(-m))
 
-def sigmoidPrime(m):
-    """Sigmoid derivative vectorized"""
+def sigmoid_prime(m):
+    """Vectorized sigmoid derivative.
+
+    Return the derivative of the sigmoid function.
+
+    Args:
+        m: a float or a np.array
+
+    Returns:
+        If input is float, return d/dx sigmoid(x) for x=m. If input is np.array
+        return np.array of derivative in each point of input.
+    """
     return sigmoid(m)*(1-sigmoid(m))
 
 def signalToActivation(z):
