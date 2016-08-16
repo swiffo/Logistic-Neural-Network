@@ -30,7 +30,7 @@ def sigmoid_prime(m):
     """
     return sigmoid(m)*(1-sigmoid(m))
 
-def signalToActivation(z):
+def signal_to_activation(z):
     """z is matrix of size numLayers x numTrainingExamples.
 Output is matrix of size (numLayers+1) x numTrainingExamples"""
     numLayers, numTrainingExamples = z.shape
@@ -95,7 +95,7 @@ inputs and outputs must be 2d ndarray
         for (from_layer, theta) in enumerate(self._thetas):
             to_layer = from_layer+1
             to_signal = np.dot(theta, self._activations[from_layer])
-            to_activation = signalToActivation(to_signal) # Adds bias neuron
+            to_activation = signal_to_activation(to_signal) # Adds bias neuron
 
             self._signals[to_layer]=to_signal
             self._activations[to_layer]=to_activation
