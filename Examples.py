@@ -1,8 +1,8 @@
-import neural_network as neural
 import numpy as np
 import random
+import neural_network as neural
 
-def greaterThan():
+def greater_than():
     """Should discover whether numbers between 0 and 10 are greater than 5"""
 
     inputs=np.random.random((1000, 1))*10
@@ -22,7 +22,7 @@ def greaterThan():
         print("{:.1f} > 5? {}  ({:.2f})".format(i, o > 0.5, o))
 
 
-def onAndOff():
+def on_and_off():
     """Maps single 'off' neuron to 1 and 0, and 'on' to 0 and 1"""    
 
     data = np.array([
@@ -39,7 +39,7 @@ def onAndOff():
     print(nn.predict(inputs))
 
 
-def _isTriangle(x,y,z):
+def _is_triangle(x,y,z):
     """Checks whether a triangle exists with the side lengths x,y,z"""
     
     lengths = [x,y,z]
@@ -52,7 +52,7 @@ def _isTriangle(x,y,z):
     return(lengths[0] + lengths[1] > lengths[2])
 
 
-def triangleNetwork():
+def triangle_network():
     """Builds neural network to check whether 3 sticks of specified length can form a triangle"""
 
     shortest = 1
@@ -62,13 +62,13 @@ def triangleNetwork():
         x = random.randint(shortest, longest)
         y = random.randint(shortest, longest)
         z = random.randint(shortest, longest)
-        rows.append([x,y,z, float(_isTriangle(x,y,z))])
+        rows.append([x, y, z, float(_is_triangle(x, y, z))])
 
     data = np.array(rows)
-    inputs = data[:,0:3]
-    outputs = data[:,[3]]
+    inputs = data[:, 0:3]
+    outputs = data[:, [3]]
 
-    nn = neural.NN([3,5,5,1])
+    nn = neural.NN([3, 5, 5, 1])
     nn.setTrainingData(inputs, outputs)
     nn.train(10000)
 
@@ -82,11 +82,11 @@ def triangleNetwork():
     test_inputs = np.array(rows)
     test_results = nn.predict(test_inputs)
 
-    totalCount=0
-    correctCount=0
+    total_count=0
+    correct_count=0
     for xx,res in zip(test_inputs, test_results[0]):
-        isCorrect = _isTriangle(xx[0],xx[1],xx[2]) == (res > 0.5)
+        isCorrect = _is_triangle(xx[0],xx[1],xx[2]) == (res > 0.5)
         print("({:2d},{:2d},{:2d}) :: {:^5} ({:.2f}).".format(xx[0], xx[1], xx[2], str(isCorrect), res))
-        totalCount += 1
-        correctCount += float(isCorrect)
+        total_count += 1
+        correct_count += float(isCorrect)
     
